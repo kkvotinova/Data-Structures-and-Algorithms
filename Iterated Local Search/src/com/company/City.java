@@ -5,7 +5,7 @@ public class City {
     private int id;
     private int x;
     private int y;
-    private int status;
+//    private int status;
     private int previousCity;
     private int nextCity;
 
@@ -17,12 +17,14 @@ public class City {
         this.y = y;
     }
 
+    // distance between two cities
     public double distanceToCity(City city, City cityNext) {
         int x = Math.abs(cityNext.getX() - city.getX());
         int y = Math.abs(cityNext.getY() - city.getY());
         return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
     }
 
+    // swap the two cities
     public void swapCities(City city, City citySwap) {
         int swap = city.previousCity;
         if (Math.abs(city.id - citySwap.id) > 1) {
@@ -39,6 +41,7 @@ public class City {
         }
     }
 
+    // generating the starting path
     public void generateInitialTravel(City[] city, int numberOfCities) {
         city[0].nextCity = city[1].id;
         city[0].previousCity = city[numberOfCities - 1].id;
@@ -50,6 +53,7 @@ public class City {
         }
     }
 
+    // count the final path
     public double getDistance(int numberOfCities, City[] city) {
         double distance = 0;
         for (int i = 0; i < numberOfCities; i++) {
@@ -82,13 +86,13 @@ public class City {
         this.y = y;
     }
 
-    public int getStatus() {
+/*    public int getStatus() {
         return status;
     }
 
     public void setStatus(int status) {
         this.status = status;
-    }
+    }*/
 
     public int getPreviousCity() {
         return previousCity;
@@ -96,13 +100,5 @@ public class City {
 
     public void setPreviousCity(int previousCity) {
         this.previousCity = previousCity;
-    }
-
-    public int getNextCity() {
-        return nextCity;
-    }
-
-    public void setNextCity(int nextCity) {
-        this.nextCity = nextCity;
     }
 }

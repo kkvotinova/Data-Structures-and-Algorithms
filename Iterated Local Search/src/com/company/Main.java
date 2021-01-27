@@ -55,6 +55,15 @@ public class Main {
         city[0].generateInitialTravel(city, numberOfCities);
         double bestDistance = city[1].getDistance(numberOfCities, city);
 
+        for (int i = 0; i < numberOfCities; i++) {
+            city[i].swapCities(city[1], city[(int) (Math.random()*numberOfCities - 1)]);
+
+            double currentDistance = city[0].getDistance(numberOfCities, city);
+            if (currentDistance < bestDistance) {
+                bestDistance = currentDistance;
+            }
+        }
+
         return bestDistance;
     }
 }

@@ -23,10 +23,6 @@ public class Main {
         double bestDistance = iteratedLocalSearch(city, numberOfCities);
         System.out.format("%.2f", bestDistance);
 
-        /*for (int i = 0; i < 8; ++i) {
-            System.out.println(city[i].getId() + " " + city[i].getPreviousCity() + " " +city[i].getNextCity());
-            System.out.println(city[2].getId() + " " + city[2].getX() + " " +city[2].getY());
-        }*/
     }
 
 
@@ -55,8 +51,13 @@ public class Main {
         city[0].generateInitialTravel(city, numberOfCities);
         double bestDistance = city[1].getDistance(numberOfCities, city);
 
-        for (int i = 0; i < numberOfCities; i++) {
-            city[i].swapCities(city[1], city[(int) (Math.random()*numberOfCities - 1)]);
+        for (int i = 0; i < Math.pow(numberOfCities, 50); i++) { // TODO: number of iteration
+            int initial = (int) (Math.random()*numberOfCities - 1);
+            int swap = (int) (Math.random()*numberOfCities - 1);
+            if (initial == swap) {
+                swap = Math.abs(initial - swap);
+            }
+            city[0].swapCities(city[initial], city[swap]);
 
             double currentDistance = city[0].getDistance(numberOfCities, city);
             if (currentDistance < bestDistance) {

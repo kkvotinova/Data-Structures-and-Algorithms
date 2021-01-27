@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1db3fc5d-2a11-491d-9436-c54113cc014f" name="Default Changelist" comment="add files part 2">
+    <list default="true" id="1db3fc5d-2a11-491d-9436-c54113cc014f" name="Default Changelist" comment="update files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Iterated Local Search/com/company/City.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Iterated Local Search/com/company/City.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Iterated Local Search/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Iterated Local Search/com/company/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/City.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/City.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -151,7 +149,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1611753712663</updated>
-      <workItem from="1611753715524" duration="21041000" />
+      <workItem from="1611753715524" duration="23181000" />
     </task>
     <task id="LOCAL-00001" summary="add files">
       <created>1611778337175</created>
@@ -167,7 +165,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611778525419</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="update files">
+      <created>1611780215804</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1611780215805</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,6 +192,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add files" />
     <MESSAGE value="add files part 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="add files part 2" />
+    <MESSAGE value="update files" />
+    <option name="LAST_COMMIT_MESSAGE" value="update files" />
   </component>
 </project>

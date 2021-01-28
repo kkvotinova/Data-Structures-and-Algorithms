@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1db3fc5d-2a11-491d-9436-c54113cc014f" name="Default Changelist" comment="update files">
+    <list default="true" id="1db3fc5d-2a11-491d-9436-c54113cc014f" name="Default Changelist" comment="update files 1.2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Iterated Local Search/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Iterated Local Search/com/company/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/City.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/City.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -119,17 +119,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.HelloJGraphT" />
@@ -149,7 +138,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1611753712663</updated>
-      <workItem from="1611753715524" duration="23181000" />
+      <workItem from="1611753715524" duration="23242000" />
+      <workItem from="1611810591742" duration="15807000" />
     </task>
     <task id="LOCAL-00001" summary="add files">
       <created>1611778337175</created>
@@ -172,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611780215805</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="update files 1.2">
+      <created>1611787538634</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1611787538634</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -188,11 +185,13 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add files" />
     <MESSAGE value="add files part 2" />
     <MESSAGE value="update files" />
-    <option name="LAST_COMMIT_MESSAGE" value="update files" />
+    <MESSAGE value="update files 1.2" />
+    <option name="LAST_COMMIT_MESSAGE" value="update files 1.2" />
   </component>
 </project>

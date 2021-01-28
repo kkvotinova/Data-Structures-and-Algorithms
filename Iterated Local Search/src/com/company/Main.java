@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         // open file
         int[] numbers = openFile();
-        int numberOfCities = numbers.length / 3;
+        int numberOfCities = 1000; // TODO: number of cities
 
         // create Cities
         int j = 0;
@@ -20,19 +20,24 @@ public class Main {
             ++j;
         }
 
-        double bestDistance = iteratedLocalSearch(city, numberOfCities);
-        System.out.format("%.2f", bestDistance);
+        // start ILS
+        int bestDistance = iteratedLocalSearch(city, numberOfCities);
+        System.out.println(bestDistance);
 
+        // answer
+        System.out.print(city[0].getId() + "->");
+        for (int i = 0; i < numberOfCities; i++) {
+            System.out.print(city[i].getNextCity() + "->");
+        }
     }
-
 
     public static int[] openFile() throws FileNotFoundException {
         File file = new File("C:\\Repositories\\kkvotinova\\Data-Structures-and-Algorithms" +
-                "\\Iterated Local Search\\src\\text.txt");
+                "\\Iterated Local Search\\src\\mona_1000.txt");
         Scanner scanner = new Scanner(file);
         int counter = 0;
         int numberOfCity = 0;
-        int[] numbers = new int[8*3]; // TODO: number of cities
+        int[] numbers = new int[1000*3]; // TODO: number of cities
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             String[] num = line.split(" ");
@@ -46,25 +51,32 @@ public class Main {
         return numbers;
     }
 
-    public static double iteratedLocalSearch(City[] city, int numberOfCities) {
+    public static int iteratedLocalSearch(City[] city, int numberOfCities) {
         // generate initial travel
         city[0].generateInitialTravel(city, numberOfCities);
-        double bestDistance = city[1].getDistance(numberOfCities, city);
+        int bestDistance = city[1].getDistance(numberOfCities, city);
 
-        for (int i = 0; i < Math.pow(numberOfCities, 50); i++) { // TODO: number of iteration
+        for (int i = 0; i < numberOfCities * 1000; i++) { // TODO: number of cities
             int initial = (int) (Math.random()*numberOfCities - 1);
             int swap = (int) (Math.random()*numberOfCities - 1);
             if (initial == swap) {
-                swap = Math.abs(initial - swap);
+                swap = (int) (Math.random()*(numberOfCities - 2));
             }
-            city[0].swapCities(city[initial], city[swap]);
 
-            double currentDistance = city[0].getDistance(numberOfCities, city);
+            if (initial > swap) {
+                int x = swap;
+                swap = initial;
+                initial = x;
+            }
+            city[0].swapCities(city, initial, swap);
+
+            int currentDistance = city[0].getDistance(numberOfCities, city);
             if (currentDistance < bestDistance) {
                 bestDistance = currentDistance;
-            }
+            } /*else {
+                city[0].returnSwapCities(city[initial], city[swap]);
+            }*/
         }
-
         return bestDistance;
     }
 }

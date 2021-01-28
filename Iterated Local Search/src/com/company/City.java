@@ -41,7 +41,11 @@ public class City {
             city[cityId].setNextCity(city[citySwapId + 1].id);
             city[citySwapId].setNextCity(city[cityId].id);
         } else if (citySwapId - cityId > 1) { // other
-            city[cityId - 1].setNextCity(city[citySwapId].id);
+            if (cityId == 0) {
+                city[city.length - 1].setNextCity(city[citySwapId].id);
+            } else {
+                city[cityId - 1].setNextCity(city[citySwapId].id);
+            }
             city[cityId].setNextCity(city[citySwapId + 1].id);
             city[citySwapId - 1].setNextCity(city[cityId].id);
             city[citySwapId].setNextCity(city[cityId + 1].id);
@@ -53,19 +57,6 @@ public class City {
 
     // return swap the two cities
     /*public void returnSwapCities(City city, City citySwap) {
-        int swap = city.previousCity;
-        if (Math.abs(city.id - citySwap.id) > 1) {
-            city.previousCity = citySwap.previousCity;
-            citySwap.previousCity = swap;
-            swap = city.nextCity;
-            city.nextCity = citySwap.nextCity;
-            citySwap.nextCity = swap;
-        } else {
-            swap = citySwap.previousCity;
-            citySwap.previousCity = city.id;
-            city.previousCity = swap;
-            citySwap.nextCity = city.nextCity;
-            city.nextCity = citySwap.id;
         }
     }*/
 

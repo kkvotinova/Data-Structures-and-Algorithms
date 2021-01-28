@@ -22,20 +22,11 @@ public class Main {
 
         // start ILS
         int bestDistance = iteratedLocalSearch(city, numberOfCities);
+
+        // answer
         System.out.println(bestDistance);
-
-        /*// answer
-        System.out.print(city[0].getId() + " ");
-        for (int i = 1; i < numberOfCities; i++) {
-            System.out.print(city[i].getNextCity() + " ");
-        }*/
-
-        int[] a = new int[1000];
         for (int i = 0; i < numberOfCities; i++) {
-            a[city[i].getNextCity() - 1] += 1;
-        }
-        for (int i = 0; i < numberOfCities; i++) {
-            System.out.print(a[i] + " ");
+            System.out.print(city[i].getId() + " ");
         }
     }
 
@@ -60,17 +51,14 @@ public class Main {
     }
 
     public static int iteratedLocalSearch(City[] city, int numberOfCities) {
-        // generate initial travel
-        city[0].generateInitialTravel(city, numberOfCities);
-        int bestDistance = city[1].getDistance(numberOfCities, city);
+        int bestDistance = city[1].getDistance(city, numberOfCities);
 
-        for (int i = 0; i < numberOfCities * 1; i++) { // TODO: number of cities
+        for (int i = 0; i < numberOfCities * 10000; i++) { // TODO: number of cities
             int initial = (int) (Math.random()*numberOfCities - 1);
             int swap = (int) (Math.random()*numberOfCities - 1);
             if (initial == swap) {
-                swap = (int) (Math.random()*(numberOfCities - 2));
+                swap = (int) (Math.random()*(numberOfCities - 1));
             }
-
             if (initial > swap) {
                 int x = swap;
                 swap = initial;
@@ -78,12 +66,12 @@ public class Main {
             }
             city[0].swapCities(city, initial, swap);
 
-            int currentDistance = city[0].getDistance(numberOfCities, city);
+            int currentDistance = city[0].getDistance(city, numberOfCities);
             if (currentDistance < bestDistance) {
                 bestDistance = currentDistance;
-            } /*else {
-                city[0].returnSwapCities(city[initial], city[swap]);
-            }*/
+            } else {
+                city[0].swapCities(city, initial, swap);
+            }
         }
         return bestDistance;
     }

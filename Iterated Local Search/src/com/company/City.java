@@ -5,7 +5,6 @@ public class City {
     private int id;
     private int x;
     private int y;
-    private int nextCity;
 
     public City() {}
 
@@ -24,60 +23,26 @@ public class City {
 
     // swap the two cities
     public void swapCities(City[] city, int cityId, int citySwapId) {
-        if (cityId == 0 && citySwapId == 1) { // 1 and 2
-            city[0].setNextCity(city[2].id);
-            city[1].setNextCity(city[0].id);
-            city[city.length - 1].setNextCity(city[1].id);
-        } else if (cityId == 0 && citySwapId == city.length - 1) { // 1 and end
-            city[0].setNextCity(city[city.length - 1].id);
-            city[city.length - 1].setNextCity(city[1].id);
-            city[city.length - 2].setNextCity(city[0].id);
-        } else if (cityId == city.length - 2 && citySwapId == city.length - 1) { // end-1 and end
-            city[city.length - 2].setNextCity(city[0].id);
-            city[city.length - 1].setNextCity(city[city.length - 2].id);
-            city[city.length - 3].setNextCity(city[city.length - 1].id);
-        } else if (citySwapId - cityId == 1) { // num and num + 1
-            city[cityId - 1].setNextCity(city[citySwapId].id);
-            city[cityId].setNextCity(city[citySwapId + 1].id);
-            city[citySwapId].setNextCity(city[cityId].id);
-        } else if (citySwapId - cityId > 1) { // other
-            if (cityId == 0) {
-                city[city.length - 1].setNextCity(city[citySwapId].id);
-            } else {
-                city[cityId - 1].setNextCity(city[citySwapId].id);
-            }
-            city[cityId].setNextCity(city[citySwapId + 1].id);
-            city[citySwapId - 1].setNextCity(city[cityId].id);
-            city[citySwapId].setNextCity(city[cityId + 1].id);
-        } else {
-            System.out.println("WRONG!");
-            System.exit(-1);
-        }
-    }
+        int id1 = city[cityId].getId();
+        int x1 = city[cityId].getX();
+        int y1 = city[cityId].getY();
 
-    // return swap the two cities
-    /*public void returnSwapCities(City city, City citySwap) {
-        }
-    }*/
+        city[cityId].setId(city[citySwapId].getId());
+        city[cityId].setX(city[citySwapId].getX());
+        city[cityId].setY(city[citySwapId].getY());
 
-    // generating the starting path
-    public void generateInitialTravel(City[] city, int numberOfCities) {
-        city[0].nextCity = city[1].id;
-       // city[0].previousCity = city[numberOfCities - 1].id;
-        city[numberOfCities - 1].nextCity = city[0].id;
-       // city[numberOfCities - 1].previousCity = city[numberOfCities - 2].id;
-        for (int i = 1; i < numberOfCities - 1; i++) {
-            city[i].nextCity = city[i + 1].id;
-         //   city[i].previousCity = city[i - 1].id;
-        }
+        city[citySwapId].setId(id1);
+        city[citySwapId].setX(x1);
+        city[citySwapId].setY(y1);
     }
 
     // count the final path
-    public int getDistance(int numberOfCities, City[] city) {
+    public int getDistance(City[] city, int numberOfCities) {
         int distance = 0;
-        for (int i = 0; i < numberOfCities; i++) {
-           distance += city[i].distanceToCity(city[i], city[city[i].nextCity - 1]);
+        for (int i = 0; i < numberOfCities - 1; i++) {
+           distance += city[i].distanceToCity(city[i], city[i + 1]);
         }
+        distance += city[0].distanceToCity(city[numberOfCities - 1], city[0]);
         return distance;
     }
 
@@ -105,11 +70,4 @@ public class City {
         this.y = y;
     }
 
-    public int getNextCity() {
-        return nextCity;
-    }
-
-    public void setNextCity(int nextCity) {
-        this.nextCity = nextCity;
-    }
 }

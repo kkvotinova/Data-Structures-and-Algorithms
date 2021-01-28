@@ -5,7 +5,9 @@ public class City {
     private int id;
     private int x;
     private int y;
+    private boolean isOpen;
 
+    /* constructors */
     public City() {}
 
     public City(int id, int x, int y) {
@@ -21,21 +23,6 @@ public class City {
         return (int) Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
     }
 
-    // swap the two cities
-    public void swapCities(City[] city, int cityId, int citySwapId) {
-        int id1 = city[cityId].getId();
-        int x1 = city[cityId].getX();
-        int y1 = city[cityId].getY();
-
-        city[cityId].setId(city[citySwapId].getId());
-        city[cityId].setX(city[citySwapId].getX());
-        city[cityId].setY(city[citySwapId].getY());
-
-        city[citySwapId].setId(id1);
-        city[citySwapId].setX(x1);
-        city[citySwapId].setY(y1);
-    }
-
     // count the final path
     public int getDistance(City[] city, int numberOfCities) {
         int distance = 0;
@@ -46,6 +33,7 @@ public class City {
         return distance;
     }
 
+    /* getter and setter */
     public int getId() {
         return id;
     }
@@ -70,4 +58,11 @@ public class City {
         this.y = y;
     }
 
+    public boolean isOpen() {
+        return isOpen;
+    }
+
+    public void setOpen(boolean open) {
+        isOpen = open;
+    }
 }

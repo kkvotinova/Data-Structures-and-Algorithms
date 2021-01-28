@@ -17,17 +17,12 @@ public class Main {
         City[] city = new City[numberOfCities];
         for (int i = 0; i < numbers.length; i += 3) {
             city[j] = new City(numbers[i], numbers[i + 1], numbers[i + 2]);
+            city[j].setOpen(true);
             ++j;
         }
 
         // start ILS
-        int bestDistance = iteratedLocalSearch(city, numberOfCities);
-
-        // answer
-        System.out.println(bestDistance);
-        for (int i = 0; i < numberOfCities; i++) {
-            System.out.print(city[i].getId() + " ");
-        }
+        iteratedLocalSearch(city, numberOfCities);
     }
 
     public static int[] openFile() throws FileNotFoundException {
@@ -50,29 +45,36 @@ public class Main {
         return numbers;
     }
 
-    public static int iteratedLocalSearch(City[] city, int numberOfCities) {
-        int bestDistance = city[1].getDistance(city, numberOfCities);
+    public static void iteratedLocalSearch(City[] city, int numberOfCities) {
+        City[] newCity = new City[numberOfCities]; // new array == answer
+        int newId = (int) (Math.random()*numberOfCities - 1); // 1st city
+        newCity[0] = new City(city[newId].getId(), city[newId].getX(), city[newId].getY()); // create 1st city
+        city[newId].setOpen(false); // close old city
 
-        for (int i = 0; i < numberOfCities * 10000; i++) { // TODO: number of cities
-            int initial = (int) (Math.random()*numberOfCities - 1);
-            int swap = (int) (Math.random()*numberOfCities - 1);
-            if (initial == swap) {
-                swap = (int) (Math.random()*(numberOfCities - 1));
+        /* main cycle
+        *  go all city {city} */
+        for (int i = 1; i < numberOfCities; i++) { // TODO: number of cities
+            int nextCity = 0;
+            int goodDistance = numberOfCities * numberOfCities; // between two city
+            int badDistance = 0;
+            for (int j = 0; j < numberOfCities; j++) { // search new best city
+                if ((newCity[i - 1].getId() != city[j].getId()) && (city[j].isOpen())) { // different cities && city isOpen
+                    badDistance = city[0].distanceToCity(newCity[i - 1], city[j]);
+                    if (badDistance < goodDistance) {
+                        nextCity = j;
+                        goodDistance = badDistance;
+                    }
+                }
             }
-            if (initial > swap) {
-                int x = swap;
-                swap = initial;
-                initial = x;
-            }
-            city[0].swapCities(city, initial, swap);
-
-            int currentDistance = city[0].getDistance(city, numberOfCities);
-            if (currentDistance < bestDistance) {
-                bestDistance = currentDistance;
-            } else {
-                city[0].swapCities(city, initial, swap);
-            }
+            newCity[i] = new City(city[nextCity].getId(), city[nextCity].getX(), city[nextCity].getY()); // create new city
+            city[nextCity].setOpen(false); // close old city
         }
-        return bestDistance;
+
+        // answer
+        int bestDistance = newCity[0].getDistance(newCity, numberOfCities);
+        System.out.println(bestDistance);
+        for (int i = 0; i < numberOfCities; i++) {
+            System.out.print(newCity[i].getId() + " ");
+        }
     }
 }

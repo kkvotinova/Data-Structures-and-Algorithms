@@ -12,17 +12,20 @@ public class Main {
         int[] numbers = openFile();
         int numberOfCities = 1000; // TODO: number of cities
 
-        // create Cities
-        int j = 0;
-        City[] city = new City[numberOfCities];
-        for (int i = 0; i < numbers.length; i += 3) {
-            city[j] = new City(numbers[i], numbers[i + 1], numbers[i + 2]);
-            city[j].setOpen(true);
-            ++j;
-        }
+        // main cycle
+        for (int iteration = 0; iteration < numberOfCities; iteration++) {
+            // create Cities
+            int j = 0;
+            City[] city = new City[numberOfCities];
+            for (int i = 0; i < numbers.length; i += 3) {
+                city[j] = new City(numbers[i], numbers[i + 1], numbers[i + 2]);
+                city[j].setOpen(true);
+                ++j;
+            }
 
-        // start ILS
-        iteratedLocalSearch(city, numberOfCities);
+            // start ILS
+            greedyAlgorithm(city, numberOfCities, iteration);
+        }
     }
 
     public static int[] openFile() throws FileNotFoundException {
@@ -45,9 +48,8 @@ public class Main {
         return numbers;
     }
 
-    public static void iteratedLocalSearch(City[] city, int numberOfCities) {
+    public static void greedyAlgorithm(City[] city, int numberOfCities, int newId) {
         City[] newCity = new City[numberOfCities]; // new array == answer
-        int newId = (int) (Math.random()*numberOfCities - 1); // 1st city
         newCity[0] = new City(city[newId].getId(), city[newId].getX(), city[newId].getY()); // create 1st city
         city[newId].setOpen(false); // close old city
 
@@ -70,11 +72,18 @@ public class Main {
             city[nextCity].setOpen(false); // close old city
         }
 
-        // answer
-        int bestDistance = newCity[0].getDistance(newCity, numberOfCities);
-        System.out.println(bestDistance);
-        for (int i = 0; i < numberOfCities; i++) {
-            System.out.print(newCity[i].getId() + " ");
+        //  print answer
+        printAnswer(newCity, numberOfCities);
+    }
+
+    public static void printAnswer(City[] city, int numberOfCities) {
+        int bestDistance = city[0].getDistance(city, numberOfCities);
+        if (bestDistance < 520000) {
+            System.out.println(bestDistance);
+            for (int i = 0; i < numberOfCities; i++) {
+                System.out.print(city[i].getId() + " ");
+            }
+            System.out.println("\n*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
         }
     }
 }

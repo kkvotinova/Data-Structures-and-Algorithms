@@ -13,7 +13,7 @@ public class Main {
         int numberOfCities = 1000; // TODO: number of cities
 
         // main cycle
-        for (int iteration = 0; iteration < numberOfCities; iteration++) {
+        for (int iteration = 549; iteration < 551; iteration++) {
             // create Cities
             int j = 0;
             City[] city = new City[numberOfCities];
@@ -73,17 +73,43 @@ public class Main {
         }
 
         //  print answer
-        printAnswer(newCity, numberOfCities);
+        randomSearch(newCity, numberOfCities);
+    }
+
+    public static void randomSearch(City[] city, int numberOfCities) {
+        int bestDistance = city[1].getDistance(city, numberOfCities);
+        for (int i = 0; i < numberOfCities * 10000; i++) { // TODO: number of cities
+            int initial = (int) (Math.random()*numberOfCities - 1);
+            int swap = (int) (Math.random()*numberOfCities - 1);
+            if (initial == swap) {
+                swap = (int) (Math.random()*(numberOfCities - 1));
+            }
+
+            if (initial > swap) {
+                int x = swap;
+                swap = initial;
+                initial = x;
+            }
+            city[0].swapCities(city, initial, swap);
+
+            int currentDistance = city[0].getDistance(city, numberOfCities);
+            if (currentDistance < bestDistance) {
+                bestDistance = currentDistance;
+            } else {
+                city[0].swapCities(city, initial, swap);
+            }
+        }
+        printAnswer(city, numberOfCities);
     }
 
     public static void printAnswer(City[] city, int numberOfCities) {
         int bestDistance = city[0].getDistance(city, numberOfCities);
-        if (bestDistance < 520000) {
+        //if (bestDistance < 520000) {
             System.out.println(bestDistance);
             for (int i = 0; i < numberOfCities; i++) {
                 System.out.print(city[i].getId() + " ");
             }
             System.out.println("\n*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
-        }
+       // }
     }
 }

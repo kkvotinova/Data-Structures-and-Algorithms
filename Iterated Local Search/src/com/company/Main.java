@@ -10,10 +10,10 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         // open file
         int[] numbers = openFile();
-        int numberOfCities = 1000; // TODO: number of cities
+        int numberOfCities = 990; // TODO: number of cities
 
         // main cycle
-        for (int iteration = 549; iteration < 551; iteration++) {
+        for (int iteration = 117; iteration < 119; iteration++) {
             // create Cities
             int j = 0;
             City[] city = new City[numberOfCities];
@@ -30,11 +30,11 @@ public class Main {
 
     public static int[] openFile() throws FileNotFoundException {
         File file = new File("C:\\Repositories\\kkvotinova\\Data-Structures-and-Algorithms" +
-                "\\Iterated Local Search\\src\\mona_1000.txt");
+                "\\Iterated Local Search\\src\\random_3.txt");
         Scanner scanner = new Scanner(file);
         int counter = 0;
         int numberOfCity = 0;
-        int[] numbers = new int[1000*3]; // TODO: number of cities
+        int[] numbers = new int[990*3]; // TODO: number of cities
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             String[] num = line.split(" ");
@@ -57,8 +57,8 @@ public class Main {
         *  go all city {city} */
         for (int i = 1; i < numberOfCities; i++) { // TODO: number of cities
             int nextCity = 0;
-            int goodDistance = numberOfCities * numberOfCities; // between two city
-            int badDistance = 0;
+            double goodDistance = numberOfCities * numberOfCities; // between two city
+            double badDistance = 0;
             for (int j = 0; j < numberOfCities; j++) { // search new best city
                 if ((newCity[i - 1].getId() != city[j].getId()) && (city[j].isOpen())) { // different cities && city isOpen
                     badDistance = city[0].distanceToCity(newCity[i - 1], city[j]);
@@ -71,14 +71,15 @@ public class Main {
             newCity[i] = new City(city[nextCity].getId(), city[nextCity].getX(), city[nextCity].getY()); // create new city
             city[nextCity].setOpen(false); // close old city
         }
-
-        //  print answer
-        randomSearch(newCity, numberOfCities);
+        //printAnswer(newCity, numberOfCities);
+        //if (newCity[0].getDistance(newCity, numberOfCities) < 520000)
+           enumSearch(newCity, numberOfCities);
+        //randomSearch(newCity, numberOfCities);
     }
 
     public static void randomSearch(City[] city, int numberOfCities) {
-        int bestDistance = city[1].getDistance(city, numberOfCities);
-        for (int i = 0; i < numberOfCities * 10000; i++) { // TODO: number of cities
+        double bestDistance = city[1].getDistance(city, numberOfCities);
+        for (int i = 0; i < numberOfCities * 1000; i++) { // TODO: number of cities
             int initial = (int) (Math.random()*numberOfCities - 1);
             int swap = (int) (Math.random()*numberOfCities - 1);
             if (initial == swap) {
@@ -92,24 +93,42 @@ public class Main {
             }
             city[0].swapCities(city, initial, swap);
 
-            int currentDistance = city[0].getDistance(city, numberOfCities);
+            double currentDistance = city[0].getDistance(city, numberOfCities);
             if (currentDistance < bestDistance) {
                 bestDistance = currentDistance;
             } else {
                 city[0].swapCities(city, initial, swap);
             }
         }
+        //  print answer
         printAnswer(city, numberOfCities);
     }
 
+    public static void enumSearch(City[] city, int numberOfCities) {
+        double bestDistance = city[1].getDistance(city, numberOfCities);
+        for (int i = 0; i < numberOfCities - 1; i++) {
+            for (int j = i + 1; j < numberOfCities; j++) {
+                city[0].swapCities(city, i, j);
+                double currentDistance = city[0].getDistance(city, numberOfCities);
+                if (currentDistance < bestDistance) {
+                    bestDistance = currentDistance;
+                } else {
+                    city[0].swapCities(city, i, j);
+                }
+            }
+            //  print answer
+            printAnswer(city, numberOfCities);
+        }
+    }
+
     public static void printAnswer(City[] city, int numberOfCities) {
-        int bestDistance = city[0].getDistance(city, numberOfCities);
-        //if (bestDistance < 520000) {
-            System.out.println(bestDistance);
+        double bestDistance = city[0].getDistance(city, numberOfCities);
+        if (bestDistance < 27138) {
+            System.out.format("%.2f\n", bestDistance);
             for (int i = 0; i < numberOfCities; i++) {
                 System.out.print(city[i].getId() + " ");
             }
             System.out.println("\n*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
-       // }
+        }
     }
 }

@@ -16,16 +16,30 @@ public class City {
         this.y = y;
     }
 
+    // swap the two cities
+    public void swapCities(City[] city, int cityId, int citySwapId) {
+        int id1 = city[cityId].getId();
+        int x1 = city[cityId].getX();
+        int y1 = city[cityId].getY();
+
+        city[cityId].setId(city[citySwapId].getId());
+        city[cityId].setX(city[citySwapId].getX());
+        city[cityId].setY(city[citySwapId].getY());
+
+        city[citySwapId].setId(id1);
+        city[citySwapId].setX(x1);
+        city[citySwapId].setY(y1);
+    }
     // distance between two cities
-    public int distanceToCity(City city, City cityNext) {
-        int x = Math.abs(cityNext.getX() - city.getX());
-        int y = Math.abs(cityNext.getY() - city.getY());
-        return (int) Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+    public double distanceToCity(City city, City cityNext) {
+        double x = Math.abs(cityNext.getX() - city.getX());
+        double y = Math.abs(cityNext.getY() - city.getY());
+        return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
     }
 
     // count the final path
-    public int getDistance(City[] city, int numberOfCities) {
-        int distance = 0;
+    public double getDistance(City[] city, int numberOfCities) {
+        double distance = 0;
         for (int i = 0; i < numberOfCities - 1; i++) {
            distance += city[i].distanceToCity(city[i], city[i + 1]);
         }

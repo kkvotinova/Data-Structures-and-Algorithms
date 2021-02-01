@@ -72,7 +72,6 @@ public class Main {
             city[nextCity].setOpen(false); // close old city
         }
         //printAnswer(newCity, numberOfCities);
-        //if (newCity[0].getDistance(newCity, numberOfCities) < 520000)
            enumSearch(newCity, numberOfCities);
         //randomSearch(newCity, numberOfCities);
     }
@@ -123,12 +122,10 @@ public class Main {
 
     public static void printAnswer(City[] city, int numberOfCities) {
         double bestDistance = city[0].getDistance(city, numberOfCities);
-        if (bestDistance < 27138) {
             System.out.format("%.2f\n", bestDistance);
             for (int i = 0; i < numberOfCities; i++) {
                 System.out.print(city[i].getId() + " ");
             }
             System.out.println("\n*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
-        }
     }
 }
